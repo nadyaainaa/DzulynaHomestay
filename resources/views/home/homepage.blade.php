@@ -7,6 +7,7 @@
 @endphp
 
 @section('content')
+
        
         <!-- Header Area Start -->
         <header id="header-sticky" class="header-2">
@@ -54,6 +55,7 @@
                                                     <li><a href="{{ route('serviceDetails') }}">Whatsapp</a></li>
                                                 </ul>
                                             </li>
+                        
                                         </ul>
                                     </nav>
                                 </div>
@@ -552,5 +554,9 @@
                 </div>
             </div>
         </footer>
-
+ <script>
+  document.getElementById('openChatbot').addEventListener('click', function () {
+    window.botpressWebChat.sendEvent({ type: "show" });
+  });
+</script>
 @endsection

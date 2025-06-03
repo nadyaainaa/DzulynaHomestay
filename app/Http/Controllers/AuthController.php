@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use App\Models\Booking;
+use App\Models\Review;
 
 class AuthController extends Controller
 {
@@ -72,7 +74,15 @@ class AuthController extends Controller
     public function edit()
     {
         $user = Auth::user();
-        return view('home/viewProfile', compact('user'));
+         // Get all bookings for the current user, with homestay data
+        $bookings = Booking::with('homestay')
+                ->where('cust_id', $user->id)
+                ->orderBy('start_date', 'desc')
+                ->get();
+        
+        $reviews = Review::where('cust_id', $user->id)->get()->keyBy('booking_id');
+
+        return view('home/viewProfile', compact('user', 'bookings', 'reviews'));
     }
 
     public function update(Request $request)

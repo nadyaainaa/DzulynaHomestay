@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\HomestayController;
+use App\Http\Controllers\ReviewController;
 
 
 Route::controller(HomeController::class)->group(function () {
@@ -47,6 +48,9 @@ Route::prefix('home')->group(function () {
         //generate receipt
         Route::get('/receipt/{bookingId}/generate', [PaymentController::class, 'generateReceipt'])->name('receipt.generate');
 
+        //give review
+        Route::post('/review/store', [ReviewController::class, 'store'])->name('review.submit');
+
 
     });
 
@@ -56,9 +60,13 @@ Route::prefix('home')->group(function () {
 
 // Admin routes
 Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', function() {
-        return view('admin.dashboard'); // ✅ Show admin dashboard
-    })->name('admin.dashboard');
+    Route::get('//dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/bookingList', [AdminController::class, 'showBookings'])->name('admin.bookings');
+    Route::get('/availability', [AdminController::class, 'showAvailability'])->name('admin.availability');
+
+    Route::get('/cuba', [AdminController::class, 'try'])->name('admin.cuba');
+
+
 });
 
 

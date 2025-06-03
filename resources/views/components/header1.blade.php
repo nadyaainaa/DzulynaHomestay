@@ -57,8 +57,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="userDropdown">
                                 <li>
-                                    View Profile
-                                    {{-- <a class="dropdown-item" href="{{ route('profile') }}">View Profile</a> --}}
+                                    <a class="dropdown-item" href="{{ route('profile.edit') }}">View Profile</a>
                                 </li>
                                 <li>
                                     <form action="{{ route('logout') }}" method="POST" class="d-inline">

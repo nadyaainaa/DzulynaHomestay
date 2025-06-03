@@ -99,7 +99,7 @@
                             </div>
                     
                             <!-- Book Now Button -->
-                            <div class="mt-4 text-center">
+                            <div class="mt-4 text-center"> 
                                 @auth
                                 <button type="button" id="previewBooking" class="btn btn-primary px-4 py-2">Book Now</button>
                             @else

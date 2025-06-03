@@ -9772,7 +9772,7 @@ td {
 
 .sidebar {
   width: 250px;
-  background-color: #2E5090;
+  background-color: #1F305E;
   position: fixed;
   top: 0;
   left: 0;
@@ -9791,7 +9791,7 @@ td {
 .sidebar .menu li a {
   display: block;
   padding: 10px;
-  color: #333;
+  color: #ffff;
   text-decoration: none;
 }
 .sidebar button#sidebarToggle {
