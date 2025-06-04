@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Homestay;
 use App\Models\Booking;
+use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +15,12 @@ class HomeController extends Controller
     }
     public function homepage()
     {
-        return view('home/homepage');
+        $reviews = Review::with(['user', 'booking']) // eager load related data
+                ->latest()
+                ->take(10) // show latest 10 reviews
+                ->get();
+
+        return view('home/homepage', compact('reviews'));
     }
 
     public function showHouse($id)

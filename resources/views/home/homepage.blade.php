@@ -213,187 +213,66 @@
             </div>
             <div class="swiper testimonial-slider-4">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="testimonial-box-items">
-                            <div class="testimonial-content">
-                                <div class="author-image">
-                                   <img src="{{ asset('assets/img/testimonial/client.png') }}" alt="author-img">
-                                    <div class="content">
-                                        <h5>Faizullah <span> /26-11</span></h5>
+                    @foreach($reviews as $review)
+                        <div class="swiper-slide">
+                            <div class="testimonial-box-items">
+                                <div class="testimonial-content">
+                                    <div class="author-image">
+                                        <img src="{{ asset('assets/img/testimonial/client.png') }}" alt="author-img">
+                                        <div class="content">
+                                            <h5>{{ $review->user->name ?? 'Anonymous' }}
+                                                <span>/ {{ \Carbon\Carbon::parse($review->created_at)->format('d-m') }}</span>
+                                            </h5>
+                                        </div>
                                     </div>
-                                </div>
-                                <p>
-                                    Homestay sangat selesa & tenang. Terima kasih atas servis yg terbaik.
-                                </p>
-                                <div class="star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                                    <p>{{ $review->comment }}</p>
+                                    <div class="star text-warning">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= (int) $review->rating)
+                                                <i class="fas fa-star"></i> {{-- Solid filled star --}}
+                                            @else
+                                                <i class="far fa-star"></i> {{-- Regular empty star --}}
+                                            @endif
+                                        @endfor
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial-box-items">
-                            <div class="testimonial-content">
-                                <div class="author-image">
-                                   <img src="{{ asset('assets/img/testimonial/client-4.png') }}" alt="author-img">
-                                    <div class="content">
-                                        <h5>Zie <span>/ 17-11</span></h5>
-                                    </div>
-                                </div>
-                                <p>
-                                    Alhamdulillah, all good including the room and facilities, maybe can add towel and dustbin.
-                                </p>
-                                <div class="star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial-box-items">
-                            <div class="testimonial-content">
-                                <div class="author-image">
-                                   <img src="{{ asset('assets/img/testimonial/client-5.png') }}" alt="author-img">
-                                    <div class="content">
-                                        <h5>Fitrah <span> /13-11</span></h5>
-                                    </div>
-                                </div>
-                                <p>
-                                    Rumah semuanya okay dan selesa, semua keperluan untuk tidur (toto dan bantal )mencukupi
-                                </p>
-                                <div class="star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial-box-items">
-                            <div class="testimonial-content">
-                                <div class="author-image">
-                                   <img src="{{ asset('assets/img/testimonial/client-6.png') }}" alt="author-img">
-                                    <div class="content">
-                                        <h5>Hanis Marzelan <span>/4-11</span></h5>
-                                    </div>
-                                </div>
-                                <p>
-                                    Alhamdulillah, terbaik homestay ni, bersih & lengkap dan selesa. Sangat recommended dan akan repeat.
-                                </p>
-                                <div class="star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
+
             <div class="swiper testimonial-slider-5">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="testimonial-box-items">
-                            <div class="testimonial-content">
-                                <div class="author-image">
-                                   <img src="{{ asset('assets/img/testimonial/client-7.png') }}" alt="author-img">
-                                    <div class="content">
-                                        <h5>Fatimah <span>/ 2-6</span></h5>
+                    @foreach($reviews as $review)
+                        <div class="swiper-slide">
+                            <div class="testimonial-box-items">
+                                <div class="testimonial-content">
+                                    <div class="author-image">
+                                        <img src="{{ asset('assets/img/testimonial/client.png') }}" alt="author-img">
+                                        <div class="content">
+                                            <h5>{{ $review->user->name ?? 'Anonymous' }}
+                                                <span>/ {{ \Carbon\Carbon::parse($review->created_at)->format('d-m') }}</span>
+                                            </h5>
+                                        </div>
                                     </div>
-                                </div>
-                                <p>
-                                    Sangat selesa, bersih dan menepati expectation. Terbaik.
-                                </p>
-                                <div class="star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                                    <p>{{ $review->comment }}</p>
+                                    <div class="star text-warning">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= (int) $review->rating)
+                                                <i class="fas fa-star"></i> {{-- Solid filled star --}}
+                                            @else
+                                                <i class="far fa-star"></i> {{-- Regular empty star --}}
+                                            @endif
+                                        @endfor
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial-box-items">
-                            <div class="testimonial-content">
-                                <div class="author-image">
-                                   <img src="{{ asset('assets/img/testimonial/client-8.png') }}" alt="author-img">
-                                    <div class="content">
-                                        <h5>Syafiq Saroni <span>/ 28-4</span></h5>
-                                    </div>
-                                </div>
-                                <p>
-                                    Hospitality yang baik dan rumah homestay sangat selesa. 
-                                </p>
-                                <div class="star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial-box-items">
-                            <div class="testimonial-content">
-                                <div class="author-image">
-                                   <img src="{{ asset('assets/img/testimonial/client-9.png') }}" alt="author-img">
-                                    <div class="content">
-                                        <h5>Hasbullah <span>/ 29-4</span></h5>
-                                    </div>
-                                </div>
-                                <p>
-                                    Perkhidmatan rumah homestay sangat selesa, memang terbaik.Kami sekeluarga sangat berpuas hati.
-                                </p>
-                                <div class="star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial-box-items">
-                            <div class="testimonial-content">
-                                <div class="author-image">
-                                   <img src="{{ asset('assets/img/testimonial/client-10.png') }}" alt="author-img">
-                                    <div class="content">
-                                        <h5>Haslindah <span>/ 20-4</span></h5>
-                                    </div>
-                                </div>
-                                <p>
-                                    Homestay sangat cantik dan bersih, akan repeat di masa akan datang.
-                                </p>
-                                <div class="star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
+
         </section>
 
         
