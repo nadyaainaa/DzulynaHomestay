@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Homestay;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Response;
 
 class PaymentController extends Controller
 {
@@ -51,5 +52,18 @@ class PaymentController extends Controller
     $pdf = Pdf::loadView('receipt', compact('booking', 'homestay', 'price', 'days'));
 
     return $pdf->download('receipt_booking_'.$booking->id.'.pdf');
+}
+
+    public function downloadReceipt(Booking $booking)
+{
+    $homestay = $booking->homestay;
+    $price = $booking->price;
+    $days = $booking->days;
+
+    $pdf = Pdf::loadView('printReceipt', compact('booking', 'homestay', 'price', 'days'));
+
+    $filename = 'receipt_booking_' . $booking->id . '.pdf';
+
+    return $pdf->download($filename); // prompts download automatically
 }
 }

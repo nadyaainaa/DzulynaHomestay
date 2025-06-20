@@ -8,6 +8,7 @@ use App\Models\Booking;
 use App\Models\Homestay;
 use App\Models\User;
 use App\Models\Review;
+use App\Models\Payment;
 
 use Carbon\Carbon;
 
@@ -97,4 +98,11 @@ class AdminController extends Controller
         'unavailableDates' => $unavailableDates
     ]);
 }
+
+    public function showReceiptAdmin($id)
+{
+    $payment = Payment::with('booking.homestay', 'booking.customer')->findOrFail($id);
+    return view('home/printReceipt', compact('payment'));
+}
+
 }

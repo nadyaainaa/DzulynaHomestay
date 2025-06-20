@@ -16,7 +16,9 @@
             <p><strong>Total Days:</strong> {{ $days }}</p>
             <p><strong>Status:</strong> <span class="badge-success">Successful Payment</span></p>
             <div class="actions">
-                <button onclick="window.print()">Print Receipt</button>
+                <a href="{{ route('receipt.download', $booking->id) }}" class="btn btn-primary">
+                    Download PDF Receipt
+                </a>
                 <a href="/" class="btn-home">Go to Homepage</a>
             </div>
         </div>

@@ -30,7 +30,6 @@
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Status</th>
-                                <th>Payment Receipt</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,10 +54,6 @@
                                             {{ ucfirst($booking->status) }}
                                         </span>
                                     </td>
-                                    <td>
-                                      #
-                                    </td>
-
                                 </tr>
                             @empty
                                 <tr>

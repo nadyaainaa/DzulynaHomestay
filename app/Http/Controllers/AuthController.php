@@ -89,12 +89,35 @@ class AuthController extends Controller
     {
         $user = Auth::user();
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'nullable|string|max:20',
-        ]);
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'phone' => 'nullable|string|max:20',
+        'current_password' => 'nullable|string',
+        'new_password' => 'nullable|string|min:8|confirmed',
+    ]);
 
-        $user->update($validated);
+    // Update profile info
+    $user->name = $validated['name'];
+    $user->phone = $validated['phone'];
+
+    // Handle password change
+    if (!empty($validated['current_password']) || !empty($validated['new_password'])) {
+        if (empty($validated['current_password']) || empty($validated['new_password'])) {
+            return back()->withErrors(['new_password' => 'To change password, fill in both current and new password.']);
+        }
+
+        if (!Hash::check($validated['current_password'], $user->password)) {
+            return back()->withErrors(['current_password' => 'Current password is incorrect.']);
+        }
+
+        if (Hash::check($validated['new_password'], $user->password)) {
+            return back()->withErrors(['new_password' => 'New password cannot be the same as your current password.']);
+        }
+
+        $user->password = Hash::make($validated['new_password']);
+    }
+
+    $user->save();
 
         return redirect()->route('profile.edit')->with('success', 'Profile updated successfully.');
     }

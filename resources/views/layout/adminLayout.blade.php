@@ -87,6 +87,14 @@
             <span class="pc-mtext">Homestay Availability</span>
           </a>
         </li>
+        <li class="pc-item">
+          <a href="{{ route('admin.availability')}}" class="pc-link">
+            <span class="pc-micon">
+              <i data-feather="star"></i>
+            </span>
+            <span class="pc-mtext">Customer Review</span>
+          </a>
+        </li>
         {{-- <li class="pc-item pc-caption">
           <label>UI Components</label>
           <i data-feather="feather"></i>

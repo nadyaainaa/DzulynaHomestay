@@ -53,8 +53,12 @@
 
     
     
-    <script src="https://cdn.botpress.cloud/webchat/v2.5/inject.js"></script>
-    <script src="https://files.bpcontent.cloud/2025/06/03/14/20250603142653-N0RPP5HS.js"></script>
+    
+    
+    <script src="https://cdn.botpress.cloud/webchat/v3.0/inject.js" defer></script>
+<script src="https://files.bpcontent.cloud/2025/06/03/14/20250603142653-N0RPP5HS.js" defer></script>
+    
+    
     
     
     

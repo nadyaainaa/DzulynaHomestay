@@ -40,6 +40,23 @@
                         <input type="email" class="form-control" value="{{ $user->email }}" disabled>
                     </div>
 
+                    <div class="form-group mb-3">
+                        <input type="password" name="current_password" class="form-control @error('current_password') is-invalid @enderror"
+                            placeholder="Current Password">
+                        @error('current_password') <div class="invalid-feedback text-start">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="password" name="new_password" class="form-control @error('new_password') is-invalid @enderror"
+                            placeholder="New Password">
+                        @error('new_password') <div class="invalid-feedback text-start">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <input type="password" name="new_password_confirmation" class="form-control"
+                            placeholder="Confirm New Password">
+                    </div>
+
                     <button type="submit" class="btn btn-primary w-100">Save Changes</button>
                     <a href="{{ route('homepage') }}" class="d-block mt-3 text-primary">← Back to Home</a>
                 </form>
