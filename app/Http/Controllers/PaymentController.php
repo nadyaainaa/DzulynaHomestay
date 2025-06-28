@@ -20,27 +20,28 @@ class PaymentController extends Controller
     }
 
       public function process(Request $request)
-    {
-        // Store new payment
-        $payment = Payment::create([
-            'price' => $request->price,
-        ]);
+{
+    // Store new payment
+    $payment = Payment::create([
+        'price' => $request->price,
+    ]);
 
-        // Update booking with payment_id and set status to 'paid'
-        Booking::where('id', $request->booking_id)->update([
-            'payment_id' => $payment->id,
-            'status' => 'paid',
-        ]);
+    // Update booking with payment_id and set status to 'paid'
+    Booking::where('id', $request->booking_id)->update([
+        'payment_id' => $payment->id,
+        'status' => 'paid',
+    ]);
 
-        $booking = Booking::find($request->booking_id);
-        $homestay = Homestay::find($booking->homestay_id);
+    $booking = Booking::find($request->booking_id);
+    $homestay = Homestay::find($booking->homestay_id);
 
-        $reference_id = rand(100000000, 999999999);
-        $price = $booking->price;
-        $days = $booking->days;
+    $reference_id = rand(100000000, 999999999);
+    $price = $booking->price;
+    $days = $booking->days;
 
-        return view('home.confirmPayment', compact('reference_id', 'homestay', 'price', 'days'));
-    }
+    // ✅ Pass the booking to the view
+    return view('home.confirmPayment', compact('reference_id', 'homestay', 'price', 'days', 'booking'));
+}
 
     public function generateReceipt($bookingId)
 {
@@ -49,21 +50,21 @@ class PaymentController extends Controller
     $price = $booking->price;
     $days = $booking->days;
 
-    $pdf = Pdf::loadView('receipt', compact('booking', 'homestay', 'price', 'days'));
+    $pdf = Pdf::loadView('home.printReceipt', compact('booking', 'homestay', 'price', 'days'));
 
     return $pdf->download('receipt_booking_'.$booking->id.'.pdf');
 }
-
-    public function downloadReceipt(Booking $booking)
+    
+public function downloadReceipt(Booking $booking)
 {
     $homestay = $booking->homestay;
     $price = $booking->price;
     $days = $booking->days;
 
-    $pdf = Pdf::loadView('printReceipt', compact('booking', 'homestay', 'price', 'days'));
+    $pdf = Pdf::loadView('home.printReceipt', compact('booking', 'homestay', 'price', 'days'));
 
     $filename = 'receipt_booking_' . $booking->id . '.pdf';
 
-    return $pdf->download($filename); // prompts download automatically
+    return $pdf->download($filename);
 }
 }

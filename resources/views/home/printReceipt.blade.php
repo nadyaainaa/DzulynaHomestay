@@ -20,8 +20,14 @@
             margin-bottom: 30px;
         }
 
+        .header img {
+            width: 220px; /* ✅ Increased logo size */
+            height: auto;
+            margin-bottom: 10px;
+        }
+
         .header h2 {
-            margin: 0;
+            margin: 5px 0;
         }
 
         .section {
@@ -41,7 +47,22 @@
         }
 
         table td {
-            padding: 8px;
+            padding: 6px 4px;
+            vertical-align: top;
+        }
+
+        table td:first-child {
+            width: 35%;
+            font-weight: bold;
+        }
+
+        .badge-paid {
+            display: inline-block;
+            padding: 4px 8px;
+            color: white;
+            background-color: #28a745;
+            border-radius: 4px;
+            font-size: 12px;
         }
 
         .total {
@@ -61,6 +82,7 @@
 <body>
 
     <div class="header">
+        <img src="{{ public_path('assets/img/dzl2.png') }}" alt="Dzulyna Homestay Logo">
         <h2>Dzulyna Homestay</h2>
         <p>Payment Receipt</p>
     </div>
@@ -69,27 +91,31 @@
         <h4>Booking Details</h4>
         <table>
             <tr>
-                <td><strong>Booking ID:</strong></td>
+                <td>Booking ID:</td>
                 <td>#{{ $booking->id }}</td>
             </tr>
             <tr>
-                <td><strong>Customer:</strong></td>
+                <td>Customer Name:</td>
                 <td>{{ $booking->customer->name }}</td>
             </tr>
             <tr>
-                <td><strong>Homestay:</strong></td>
+                <td>Phone Number:</td>
+                <td>{{ $booking->customer->phone ?? '-' }}</td>
+            </tr>
+            <tr>
+                <td>Homestay:</td>
                 <td>{{ $homestay->name }}</td>
             </tr>
             <tr>
-                <td><strong>Check-in Date:</strong></td>
+                <td>Check-in Date:</td>
                 <td>{{ \Carbon\Carbon::parse($booking->start_date)->format('d M Y') }}</td>
             </tr>
             <tr>
-                <td><strong>Check-out Date:</strong></td>
+                <td>Check-out Date:</td>
                 <td>{{ \Carbon\Carbon::parse($booking->end_date)->format('d M Y') }}</td>
             </tr>
             <tr>
-                <td><strong>Total Days:</strong></td>
+                <td>Total Days:</td>
                 <td>{{ $days }} day(s)</td>
             </tr>
         </table>
@@ -99,12 +125,12 @@
         <h4>Payment Summary</h4>
         <table>
             <tr>
-                <td><strong>Total Price:</strong></td>
+                <td>Total Price:</td>
                 <td>RM {{ number_format($price, 2) }}</td>
             </tr>
             <tr>
-                <td><strong>Payment Status:</strong></td>
-                <td>{{ ucfirst($booking->status) }}</td>
+                <td>Payment Status:</td>
+                <td><span class="badge-paid">Paid</span></td>
             </tr>
         </table>
     </div>

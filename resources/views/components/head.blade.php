@@ -28,6 +28,8 @@
         <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
         <!--<< Main.css >>-->
         <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+        <!--<< SweetAlert >>-->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         
 
 </head>

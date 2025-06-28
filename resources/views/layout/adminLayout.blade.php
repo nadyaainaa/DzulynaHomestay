@@ -34,6 +34,8 @@
     <link rel="stylesheet" href="{{ asset('assets/admin-assets/css/style.css') }}" id="main-style-link" />
     @stack('styles')
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/main.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
 
 
   </head>

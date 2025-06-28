@@ -34,25 +34,25 @@
                                                 </a>
                                                 <ul class="submenu">
                                                     <li><a href="{{ route('house1', ['id' => 1]) }}">House 1 : Teluk Intan</a></li>
-                                                    <li><a href="{{ route('service') }}">House 2 : Bagan Datuk </a></li>
-                                                    <li><a href="{{ route('service') }}">House 3 : Sg.Tiang</a></li>
+                                                    <li><a href="{{ route('house2', ['id' => 2]) }}">House 2 : Bagan Datuk </a></li>
+                                                    <li><a href="{{ route('house3', ['id' => 3]) }}">House 3 : Sg.Tiang</a></li>
                                                 </ul>
                                             </li>
                                             
                                             <li>
-                                                <a href="{{ route('about') }}">About</a>
+                                                <a href="#about">About</a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('about') }}">Feedback</a>
+                                                <a href="#feedback">Feedback</a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('serviceDetails') }}">
+                                                <a href="{{ route('homepage') }}">
                                                     Contact
                                                     <i class="fas fa-angle-down"></i>
                                                 </a>
                                                 <ul class="submenu">
-                                                    <li><a href="{{ route('service') }}">Facebook</a></li>
-                                                    <li><a href="{{ route('serviceDetails') }}">Whatsapp</a></li>
+                                                    <li><a href="https://www.facebook.com/profile.php?id=100091556442878" >Facebook</a></li>
+                                                    <li><a href="https://wa.me/0182551043">Whatsapp</a></li>
                                                 </ul>
                                             </li>
                         
@@ -73,9 +73,9 @@
                                             <a class="dropdown-item" href="{{ route('profile.edit') }}">View Profile</a>
                                         </li>
                                         <li>
-                                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                                            <form action="{{ route('logout') }}" method="POST" id="logout-form" class="d-inline">
                                                 @csrf
-                                                <button type="submit" class="dropdown-item">Sign Out</button>
+                                                <button type="button" class="dropdown-item logout-btn">Sign Out</button>
                                             </form>
                                         </li>
                                     </ul>
@@ -198,8 +198,8 @@
             </div>
         </section>
 
-        <!-- Testimonial Section Start -->
-        <section class="testimonial-section-4 fix section-padding">
+        <!-- Feedback Section Start -->
+        <section id="feedback" class="testimonial-section-4 fix section-padding">
             <div class="container">
                 <div class="section-title text-center">
                     <span class="sub-content wow fadeInUp">
@@ -278,7 +278,7 @@
         
 
         <!-- About Section Start -->
-        <section class="about-section fix section-padding">
+        <section id="about"  class="about-section fix section-padding">
             <div class="container">
                 <div class="about-wrapper">
                     <div class="row g-4 align-items-center justify-content-between">
@@ -438,4 +438,37 @@
     window.botpressWebChat.sendEvent({ type: "show" });
   });
 </script>
+<script>
+    function confirmLogout() {
+        if (confirm("Are you sure you want to log out?")) {
+            const form = document.getElementById('logout-form');
+            form.setAttribute('action', "{{ route('logout') }}"); // set it only after confirmation
+            form.submit();
+        }
+    }
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const logoutBtn = document.querySelector('.logout-btn');
+    const logoutForm = document.getElementById('logout-form');
+
+    logoutBtn.addEventListener('click', function (e) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You will be logged out.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, log me out'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                logoutForm.submit();
+            }
+        });
+    });
+});
+</script>
+
 @endsection

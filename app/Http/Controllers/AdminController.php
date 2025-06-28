@@ -8,6 +8,7 @@ use App\Models\Booking;
 use App\Models\Homestay;
 use App\Models\User;
 use App\Models\Review;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Payment;
 
 use Carbon\Carbon;
@@ -101,8 +102,26 @@ class AdminController extends Controller
 
     public function showReceiptAdmin($id)
 {
-    $payment = Payment::with('booking.homestay', 'booking.customer')->findOrFail($id);
-    return view('home/printReceipt', compact('payment'));
+    $booking = Booking::findOrFail($id);
+    $homestay = $booking->homestay;
+    $price = $booking->price;
+    $days = $booking->days;
+
+    $pdf = Pdf::loadView('home.printReceipt', compact('booking', 'homestay', 'price', 'days'));
+
+    return $pdf->download('receipt_booking_'.$booking->id.'.pdf');
+}
+
+public function previewReceiptAdmin($id)
+{
+    $booking = Booking::findOrFail($id);
+    $homestay = $booking->homestay;
+    $price = $booking->price;
+    $days = $booking->days;
+
+    $pdf = Pdf::loadView('home.printReceipt', compact('booking', 'homestay', 'price', 'days'));
+
+    return $pdf->stream('receipt_booking_' . $booking->id . '.pdf');
 }
 
 }

@@ -37,9 +37,9 @@ class AuthController extends Controller
             $user = Auth::user();
     
             if ($user->role === 'admin') {
-                return redirect()->route('admin.dashboard'); // ✅ if admin
+                return redirect()->route('admin.dashboard'); //if admin
             } else {
-                return redirect()->route('homepage'); // ✅ if normal user
+                return redirect()->route('homepage'); //if guest
             }
         }
     
@@ -63,14 +63,14 @@ class AuthController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
-            'role' => 'user' // ✅ explicitly assign role here
+            'role' => 'user' //explicitly assign role here
         ]);
     
         Auth::login($user);
     
-        return redirect()->route('homepage'); // ✅ Cleaner to use route name instead of hard URL
+        return redirect()->route('homepage'); //Cleaner to use route name instead of hard URL
     }
-
+    //handle 
     public function edit()
     {
         $user = Auth::user();

@@ -49,7 +49,6 @@ Route::prefix('home')->group(function () {
         Route::get('/receipt/{bookingId}/generate', [PaymentController::class, 'generateReceipt'])->name('receipt.generate');
         Route::get('/download-receipt/{booking}', [PaymentController::class, 'downloadReceipt'])->name('receipt.download');
 
-
         //give review
         Route::post('/review/store', [ReviewController::class, 'store'])->name('review.submit');
 
@@ -67,6 +66,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/availability', [AdminController::class, 'showAvailability'])->name('admin.availability');
     Route::get('/admin/payment-receipt/{id}', [PaymentController::class, 'showReceiptAdmin'])->name('admin.payment.receipt');
     Route::get('/cuba', [AdminController::class, 'try'])->name('admin.cuba');
+   
+    Route::get('/admin/payment-receipt/{id}', [AdminController::class, 'showReceiptAdmin'])->name('admin.payment.receipt');
+Route::get('/admin/payment-receipt-preview/{id}', [AdminController::class, 'previewReceiptAdmin'])->name('admin.payment.receipt.preview');
 
 
 });

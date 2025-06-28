@@ -56,7 +56,20 @@
                                         </span>
                                     </td>
                                     <td>
-                                      #
+                                        @if($booking->status === 'paid')
+                                            <div class="d-flex gap-1">
+                                                <form action="{{ route('admin.payment.receipt', $booking->id) }}" method="GET" onsubmit="return confirmAdminReceiptDownload(event)">
+                                                    <button type="submit" class="btn btn-sm btn-primary mb-2">
+                                                        <i class="bi bi-download"></i> Download
+                                                    </button>
+                                                </form>
+                                                <a href="{{ route('admin.payment.receipt.preview', $booking->id) }}" target="_blank" class="btn btn-sm btn-outline-secondary">
+                                                    <i class="bi bi-eye"></i> Preview
+                                                </a>
+                                            </div>
+                                        @else
+                                            <button class="btn btn-sm btn-secondary" disabled>Not Paid</button>
+                                        @endif
                                     </td>
 
                                 </tr>
@@ -73,4 +86,27 @@
         </div>
     </div>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmAdminReceiptDownload(event) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Download Receipt?',
+            text: "Do you want to download this receipt PDF?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#aaa',
+            confirmButtonText: 'Yes, download',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                event.target.submit();
+            }
+        });
+        return false;
+    }
+</script>
 @endsection

@@ -32,13 +32,26 @@
                     <div class="swiper-wrapper">
                         @foreach(range(1, 4) as $i)
                             <div class="swiper-slide">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="{{ asset('assets/img/house/house2/image'.$i.'.jpg') }}">
                                 <img src="{{ asset('assets/img/house/house2/image'.$i.'.jpg') }}" class="img-fluid rounded house-img" alt="House Image {{ $i }}">
+                            </a>
                             </div>
                         @endforeach
                     </div>
                     <!-- Navigation -->
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
+                </div>
+
+                <!-- ✅ Bootstrap Modal for full image view -->
+                <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content bg-transparent border-0">
+                    <div class="modal-body text-center">
+                        <img id="modalImage" src="" class="img-fluid rounded" alt="Large View">
+                    </div>
+                    </div>
+                </div>
                 </div>
         
                 <!-- ✅ Two Column Layout -->
@@ -67,7 +80,7 @@
                                 <h4 class="wow fadeInUp mb-3" data-wow-delay=".4s" style="text-decoration: underline;">Location</h4>
                                 <div class="ratio ratio-16x9">
                                     <iframe 
-                                        src="https://www.google.com/maps/embed?pb=YOUR_GOOGLE_MAP_EMBED_LINK_HERE"
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9565.513973995014!2d101.02552198610292!3d3.949868131526529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cb6b315a795ce1%3A0xee026658560bd517!2sDzulyna%20Homestay%20Teluk%20Intan!5e1!3m2!1sen!2smy!4v1750678556625!5m2!1sen!2smy"
                                         width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
                                     </iframe>
                                 </div>
@@ -389,6 +402,19 @@ document.getElementById('previewBooking').addEventListener('click', function () 
     // Show the modal
     const modal = new bootstrap.Modal(document.getElementById('bookingModal'));
     modal.show();
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const imageModal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+
+    imageModal.addEventListener('show.bs.modal', function (event) {
+        const trigger = event.relatedTarget;
+        const imgSrc = trigger.getAttribute('data-img');
+        modalImage.src = imgSrc;
+    });
 });
 </script>
 

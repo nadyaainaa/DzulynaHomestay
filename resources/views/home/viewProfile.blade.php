@@ -76,6 +76,7 @@
                             <th>Check-out</th>
                             <th>Total</th>
                             <th>Status</th>
+                            <th>Receipt</th>
                             <th>Review</th>
                         </tr>
                     </thead>
@@ -93,6 +94,17 @@
                                         <span class="badge bg-warning text-dark">Pending</span>
                                     @elseif($booking->status === 'cancelled')
                                         <span class="badge bg-danger text-white">Cancelled</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($booking->status === 'paid')
+                                        <form action="{{ route('receipt.generate', $booking->id) }}" method="GET" onsubmit="return confirmDownload(event)">
+                                            <button type="submit" class="btn btn-sm btn-primary">
+                                                <i class="bi bi-download"></i> Print Receipt
+                                            </button>
+                                        </form>
+                                    @else
+                                        <button class="btn btn-sm btn-secondary" disabled>Not Available</button>
                                     @endif
                                 </td>
                                 <td>
@@ -183,6 +195,29 @@
         new bootstrap.Modal(document.getElementById('reviewModal')).show();
     }
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDownload(event) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Download Receipt?',
+            text: "Do you want to download the PDF receipt for this booking?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#aaa',
+            confirmButtonText: 'Yes, download',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                event.target.submit(); // continue form submission
+            }
+        });
+        return false;
+    }
+</script>
+
 
 {{-- CSS for stars --}}
 <style>
